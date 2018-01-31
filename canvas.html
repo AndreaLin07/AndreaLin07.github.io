@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>canvas</title>
+    <script type="text/javascript">
+        var canvas;
+        var context;
+        var isPaint = false;
+        window.onload = function(){
+        	canvas = document.getElementById("myCanvas");
+        	context = canvas.getContext("2d");
+        }
+        function mdh(e){    //當滑鼠按下
+            var x = e.clientX;
+            var y = e.clientY;
+            context.beginPath();
+            context.lineWidth = 12;
+            context.strokeStyle = "yellow";
+            context.moveTo(x, y);
+            isPaint = true;
+        }
+        function mmh(e){    //當滑鼠移動
+        	if(isPaint){
+        		var x = e.clientX;
+        		var y = e.clientY;
+        		context.lineTo(x, y);
+        		context.stroke();
+        	}
+        }
+        function muh(e){    //當滑鼠放開
+        	isPaint = false;
+        }
+        function clean(e){  //當按下清除鍵
+        	context.clearRect(0, 0, canvas.width, canvas.height);
+
+        }
+    </script>
+ </head>
+ <body>
+ <canvas id="myCanvas" width="900" height="900"
+         onmousedown="mdh(event)"
+         onmousemove="mmh(event)"
+         onmouseup="muh(event)"
+         style="cursor: auto; background: black"></canvas>
+ <hr>
+ <button onclick="clean()" style="width: 200px">clear</button>        
+ </body>
+ </html>
